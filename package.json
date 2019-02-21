@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "clean": "rimraf lib && rimraf src/styles/lib",
+    "build:file": "node build/components.js > components.json",
+    "build:theme": "gulp build --gulpfile ./src/styles/gulpfile.js && cp-cli ./src/styles/lib ./lib",
+    "dev": "cross-env NODE_ENV=develop vue-cli-service serve",
+    "build": "cross-env NODE_ENV=production vue-cli-service build",
+    "dist": "cross-env NODE_ENV=production yarn run build:theme && yarn run build:file && webpack --config build/webpack.conf.js",
+    "lint": "vue-cli-service lint",
+    "build:watch": "gulp watch-build --gulpfile /src/styles/gulpfile.js",
+    "lib": "vue-cli-service build --target lib --name index --dest lib src/components/index.js"
   },
   "dependencies": {
     "vue": "^2.5.22",
@@ -18,11 +24,25 @@
     "@vue/cli-service": "^3.4.0",
     "@vue/eslint-config-prettier": "^4.0.1",
     "babel-eslint": "^10.0.1",
+    "cp-cli": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "del": "^3.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
     "fibers": "^3.1.1",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.1.7",
+    "gulp-postcss": "^6.1.1",
+    "gulp-sass": "^3.1.0",
+    "progress-bar-webpack-plugin": "^1.12.1",
+    "rimraf": "^2.6.3",
     "sass": "^1.16.0",
     "sass-loader": "^7.1.0",
-    "vue-template-compiler": "^2.5.21"
+    "terser-webpack-plugin": "^1.2.2",
+    "vue-loader": "^15.6.4",
+    "vue-template-compiler": "^2.5.21",
+    "webpack-cli": "^3.2.3"
   }
 }

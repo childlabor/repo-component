@@ -5,7 +5,7 @@
   "main": "lib/customui.umd.min.js",
   "keyword": "components UI",
   "private": false,
-  "author": "childlabor",
+  "author": "Labor",
   "keywords": [
     "UI",
     "components"
@@ -13,12 +13,13 @@
   "license": "MIT",
   "scripts": {
     "clean": "rimraf lib && rimraf src/styles/lib",
-    "build:file": "node build/components.js > components.json",
+    "build:file": "node build/components.js > build/components.json",
     "build:theme": "gulp build --gulpfile src/styles/gulpfile.js && cp-cli src/styles/lib lib/styles",
     "lib": "vue-cli-service build --target lib --name customui --dest lib src/components/index.js && npm run build:theme",
-    "dev": "cross-env NODE_ENV=develop vue-cli-service serve",
-    "build": "cross-env NODE_ENV=production vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vue-cli-service serve --mode development",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "inspect": "vue-cli-service inspect > build/webpack.config.inspect.js"
   },
   "dependencies": {
     "mycustomui": "^0.1.2",

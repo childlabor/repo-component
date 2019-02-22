@@ -3,12 +3,13 @@ import App from "./App.vue";
 import router from "./router/index";
 import store from "./store/index";
 
+// 组件库
+import './styles/src/index.scss';
+import customUI from "./components/index";
 // npm包
 // import 'mycustomui/lib/styles/index.css';
 // import customUI from "mycustomui";
-// 本地测试
-import './styles/src/index.scss';
-import customUI from "./components/index";
+
 
 Vue.use(customUI);
 

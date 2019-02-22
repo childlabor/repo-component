@@ -10,3 +10,5 @@ babel.config.js
 *.map
 postcss.config.js
 .eslintrc.js
+.browserslistrc
+.env.*

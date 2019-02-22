@@ -9,6 +9,8 @@ $ npm install mycustomui --save
 ## Quick Start
 ```
 import Vue from 'vue';
+
+import 'mycustomui/lib/styles/index.css';
 import customUI from "mycustomui";
 
 Vue.use(customUI);

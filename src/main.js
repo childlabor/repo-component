@@ -6,10 +6,6 @@ import store from "./store/index";
 // 组件库
 import './styles/src/index.scss';
 import customUI from "./components/index";
-// npm包
-// import 'mycustomui/lib/styles/index.css';
-// import customUI from "mycustomui";
-
 
 Vue.use(customUI);
 

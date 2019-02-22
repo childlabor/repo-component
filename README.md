@@ -1,4 +1,6 @@
 # mycustomui
+[![NPM](https://nodei.co/npm/mycustomui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mycustomui/)
+
 基于vue组件库，陆续增加中...
 
 ## Installation
@@ -21,10 +23,9 @@ Vue.use(customUI);
 </div>
 ```
 
-### TODO list
+## TODO list
 1. 补充组件库
 2. 组件按需引入
 3. 整理文档
-
 
 

@@ -1,6 +1,10 @@
+* {
+  margin:  0;
+  padding: 0;
+}
 .hello {
   h3 {
-    margin: 40px 0 0;
+    margin: 200px 0 0;
   }
   ul {
     list-style-type: none;
@@ -8,9 +12,13 @@
   }
   li {
     display: inline-block;
-    margin: 0 10px;
+    // margin: 0 10px;
   }
   a {
     color: #42b983;
+  }
+  .vm {
+    background: #54e0a2;
+    width: 750px;
   }
 }

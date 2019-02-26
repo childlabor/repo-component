@@ -1,4 +1,4 @@
-import HelloWorld from './main.vue';
+import HelloWorld from './src/main.vue';
 
 /* istanbul ignore next */
 HelloWorld.install = function(Vue) {

@@ -5,10 +5,13 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const cssmin = require('gulp-cssmin');
 const postcss = require('gulp-postcss');
-const pxtoviewport = require('postcss-px-to-viewport');
-const concat = require('gulp-concat');
+const pxtoviewport = require('postcss-px-to-viewport'); // px2vw
+const concat = require('gulp-concat'); // css合并
 const del = require('del');
 
+gulp.task('build', ['compile', 'images']);
+
+// ===================== task ==========================
 gulp.task('clean', function (cb) {
   return del(['./lib'], cb);
 });
@@ -29,16 +32,14 @@ gulp.task('compile', ['clean'], function() {
       browsers: ['ie > 9', 'last 2 versions'],
       cascade: false
     }))
-    // .pipe(concat('index.css'))
     .pipe(postcss(processors))
     .pipe(cssmin())
     .pipe(gulp.dest('./lib'));
 });
 
-gulp.task('copyfont', function() {
-  return gulp.src('./src/fonts/**')
-    .pipe(cssmin())
-    .pipe(gulp.dest('./lib/fonts'));
+gulp.task('images', ['clean'], function() {
+  return gulp.src('./src/images/**')
+    .pipe(gulp.dest('./lib/images'));
 });
 
-gulp.task('build', ['clean', 'compile']);
+

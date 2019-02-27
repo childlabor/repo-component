@@ -21,23 +21,18 @@ export default {
     }
   },
   mounted() {
-    // this.$toast.warning('警告');
+    this.$toast.warning('警告');
   },
   methods: {
-    // leftTime(count) {
-    //   setInterval(() => {
-    //     count+=1
-    //     console.log(count/10);
-    //   }, 100);
-    // },
     showToast() {
+      let _this = this;
       this.$toast({
         message: '测试数据1',
         type: 'success',
-        duration: 2000,
+        duration: 5000,
         animate: 1,
         onClose: function() {
-          console.log('closed callback', this);
+          console.log('closed callback1', _this);
         }
       });
     },

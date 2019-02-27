@@ -1,5 +1,5 @@
 <template>
-  <transition :name="animateType[animate - 1]" @after-leave="handleAfterLeave">
+  <transition :name="animateType[animate - 1]">
     <div class="custom-toast" v-show="visible">
       <div class="toast-box">
         <i :class="['toast-icon', `icon-${type}`]"></i>
@@ -16,8 +16,8 @@ export default {
     return {
       visible: false,
       closed: false,
-      message: '',
-      type: 'info',
+      message: String,
+      type: String,
       timer: null,
       duration: 2500,
       animate: 1,
@@ -27,6 +27,9 @@ export default {
   },
   mounted() {
     this.startTimer();
+  },
+  beforeDestroy() {
+    this.clearTimer();
   },
   watch: {
     closed(newVal) {
@@ -46,20 +49,17 @@ export default {
         }, this.duration);
       }
     },
+    clearTimer() {
+      clearTimeout(this.timer);
+    },
     close() {
       this.closed = true;
-      clearTimeout(this.timer);
+      this.clearTimer();
       if (typeof this.onClose === 'function') {
         this.onClose();
       }
-    },
-    handleAfterLeave() {
-      // console.log('leave');
-      this.$destroy(true);
-      // this.$el.parentNode.removeChild(this.$el);
     }
   }
-
 };
 </script>
 

@@ -28,11 +28,11 @@ export default {
   data() {
     return {
       items: [],
-      itemsLen: Number
+      itemsLen: Number,
+      activeIndex: 0
     }
   },
   created() {
-
   },
   mounted() {
     this.updateItems();
@@ -46,17 +46,37 @@ export default {
     updateItems() {
       this.items = this.$children.filter(child => child.$options.name === 'SliderItem');
       this.itemsLen = this.$children.length;
+      this.activeIndex = this.itemsLen - 1;
+      this.items.forEach((item, index) => {
+        item.initItemTranslate(this.activeIndex, this.itemsLen)
+      });
+      console.log(this.activeIndex);
+      
+    },
+    // 计算active的item的index
+    countActiveIndex(direct) {
+      if(direct === 'left') {
+        (this.activeIndex === this.itemsLen -1) ? this.activeIndex = 0: this.activeIndex += 1;
+      } else {
+        (this.activeIndex === 0) ? this.activeIndex = this.itemsLen-1: this.activeIndex -= 1;
+      }
+      console.log('active', this.activeIndex);
     },
     moveItemPosition(direct) {
+      this.countActiveIndex(direct);
       if(direct === 'left') {
         this.items.forEach((item, index) => {
-          item.itemTranslateL();
+          // item.itemTranslate(direct);
+          item.itemTranslate(this.activeIndex, this.itemsLen)
         });
       } else {
         this.items.forEach((item, index) => {
-          item.itemTranslateR();
+          // item.itemTranslate(direct);
+          item.itemTranslate(this.activeIndex, this.itemsLen)
         });
       }
+      
+      
     }
   }
 };

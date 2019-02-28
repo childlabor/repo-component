@@ -1,11 +1,20 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/images/logo.png" />
-    <HelloWorld msg="Welcome" />
-    <div class="btn-group">
-      <div class="btn" @click="showToast()">show1</div>
-      <div class="btn" @click="showToast2()">show2</div>
-      <div class="btn" @click="closeToast()">close!!!</div>
+    <div class="slider-box">
+      <LaSlider height="100%" :arrow="true">
+        <SliderItem v-for="(item, index) in items" :key="index" :index="index">
+          <!-- <img :src="item.src" alt=""> -->
+          <!-- <img :src="`${publicPath}test1.png`"> -->
+          <h1>{{index}}</h1>
+        </SliderItem>
+        <!-- <SliderItem>
+          <img src="../assets/images/test2.jpg" alt="">
+        </SliderItem>
+        <SliderItem>
+          <img src="../assets/images/test3.jpg" alt="">
+        </SliderItem> -->
+      </LaSlider>
     </div>
   </div>
 </template>
@@ -16,59 +25,28 @@ export default {
   name: "home",
   data() {
     return {
-      i: 0,
-      j: 0
+      items: [
+        {src: '/public/images/test1.jpg'},
+        {src: '/public/assets/images/test2.jpg'},
+        {src: '/public/assets/images/test3.jpg'}
+      ]
     }
   },
   mounted() {
-    this.$toast.warning('警告');
+    // this.$toast.warning('警告');
   },
   methods: {
-    showToast() {
-      let _this = this;
-      this.$toast({
-        message: '测试数据1',
-        type: 'success',
-        duration: 5000,
-        animate: 1,
-        onClose: function() {
-          console.log('closed callback1', _this);
-        }
-      });
-    },
-    showToast2() {
-      this.$toast({
-        message: '测试数据2',
-        type: 'success',
-        duration: 3000,
-        animate: 2,
-        onClose: function() {
-          console.log('closed callback2');
-        }
-      });
-    },
-    closeToast() {
-      this.$toast.close();
-    }
+    
   }
 };
 </script>
 <style lang="scss" scoped>
   .home {
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      margin: 0 auto;
-      color: #fff;
-      .btn {
-        width: 200px;
-        height: 80px;
-        line-height: 80px;
-        border-radius: 15px;
-        background: #40cc8d;
-        margin: 0 10px;
-        cursor: pointer;
-      }
+    .slider-box {
+      box-sizing: border-box;
+      width: 100%;
+      height: 61.8vw;
+      border: 1px solid cyan;
     }
   }
 </style>

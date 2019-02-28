@@ -1,8 +1,13 @@
 import HelloWorld from './hello-world/index';
 import Toast from './toast/index';
+import {LaSlider, SliderItem} from './la-slider/index';
+
+
 
 const components = [
-  HelloWorld
+  HelloWorld,
+  LaSlider,
+  SliderItem
 ];
 
 const install = function(Vue) {
@@ -21,6 +26,8 @@ if (typeof window !== 'undefined' && window.Vue) {
 export default {
   install,
   HelloWorld,
-  Toast
+  Toast,
+  LaSlider,
+  SliderItem
 };
 

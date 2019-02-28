@@ -12,3 +12,6 @@ postcss.config.js
 .eslintrc.js
 .browserslistrc
 .env.*
+.env
+.lock
+.html

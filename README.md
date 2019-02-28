@@ -1,6 +1,12 @@
-# mycustomui
-[![NPM](https://nodei.co/npm/mycustomui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mycustomui/)
-
+<!--
+[![NPM](https://nodei.co/npm/mycustomui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mycustomui/) -->
+<h1 align="center">mycustomui</h1>
+<p align="center">
+    <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/bundlephobia/minzip/mycustomui?color=cyan" /></a>
+    <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/npm/dependents/mycustomui" /></a>
+    <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/npm/v/mycustomui" /></a>
+    <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/badge/license/MIT/blue" /></a>
+</p>
 基于vue组件库，陆续增加中...
 
 ## Installation

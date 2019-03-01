@@ -9,10 +9,12 @@
 </p>
 基于vue组件库，陆续增加中...
 
+
 ## Installation
 ```
 $ npm install mycustomui --save
 ```
+
 
 ## Quick Start
 ```
@@ -24,23 +26,19 @@ import customUI from "mycustomui";
 Vue.use(customUI);
 ...
 
-// HelloWorld
-<div>
-  <HelloWorld msg="Welcome" />
-</div>
+// 示例：HelloWorld
+<HelloWorld msg="Welcome" />
 
-/*
-* 方法：toast轻提示
-*
-* 参数
-* type: ['success', 'warning', 'loading']
-* duration: 持续时间ms（default 2500, 0 默认不关闭）
-* message: 文本文字
-* animate: 显示动效 [1, 2, 3]
-* onClose: 回调
-*
-*/
 
+// 组件：LaSlider/SliderItem 走马灯
+<LaSlider :arrow="true">
+  <SliderItem v-for="(item, index) in 5" :key="index">
+    <h1>插入内容</h1>
+  </SliderItem>
+</LaSlider>
+
+
+// 方法：toast轻提示
 this.$toast.warning('warning');
 
 this.$toast({
@@ -54,6 +52,30 @@ this.$toast({
 });
 
 ```
+
+
+## Props
+
+#### 走马灯：LaSlider
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| :------:| :------: | :------: | :------: | :------: |
+| height | 高度 | String | -- | 100% |
+| arrow | 切换箭头的显示 | Boolean | true/false | false |
+| arrowColor | 切换箭头的色系 | String | light/deep | deep |
+| indicator | 底部指示器 | Boolean | true/false | true |
+| indicatorColor | 底部指示器色系 | String | light/deep | deep |
+| autoplay | 自动切换 | Boolean | true/false | true |
+| interval | 切换间隔 | Number | -- | 3000 |
+| direction | 切换方向 | String | left/right | left |
+
+#### 轻提示：toast
+| 参数 | 说明 | 类型 | 可选值 | 默认值 |
+| :------:| :------: | :------: | :------: | :------: |
+| type | 提示类型 | String | ['success', 'warning', 'loading'] | -- |
+| duration | 持续时间ms | Number | 0 默认不关闭 | 2500 |
+| message | 提示文本 | String | -- | -- |
+| animate | 显示动效 | Number | [1, 2, 3] | 1 |
+| onClose | 回调函数 | Function | -- | -- |
 
 
 ## TODO list

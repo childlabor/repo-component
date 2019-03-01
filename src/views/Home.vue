@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="../assets/images/logo.png" />
     <div class="slider-box">
       <LaSlider height="100%" :arrow="arrow" :arrowColor="arrowColor" :autoplay="autoplay" :interval="interval" :direction="direction" :indicator="indicator" :indicatorColor="indicatorColor">
-        <SliderItem v-for="(item, index) in 5" :key="index" :class="`bg${index}`">
+        <SliderItem v-for="(item, index) in 5" :key="index">
           <img :src="`https://raw.githubusercontent.com/836939563/printscreen/master/test/test${index +1}.jpg`" alt="">
           <!-- <div style="width: 100%;height: 100%; display: table;text-align: center;">
             <span style=" font-size: 30px;display: table-cell;vertical-align: middle;">
@@ -46,22 +46,7 @@ export default {
     .slider-box {
       box-sizing: border-box;
       width: 100%;
-      height: 61.8vw;
-    }
-    .bg0 {
-      background-color: red;
-    }
-    .bg1 {
-      background-color: cyan;
-    }
-    .bg2 {
-      background-color: skyblue;
-    }
-    .bg3 {
-      background-color: greenyellow;
-    }
-    .bg4 {
-      background-color: rgb(163, 162, 162);
+      height: 60vw;
     }
   }
 </style>

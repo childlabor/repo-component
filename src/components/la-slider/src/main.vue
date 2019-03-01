@@ -1,6 +1,6 @@
 <template>
-  <div 
-    class="la-slider" 
+  <div
+    class="la-slider"
     :style="{ height: height}">
     <div class="slider-container">
       <slot>
@@ -10,12 +10,12 @@
         <li
           class="la-icon-arrow la-icon-arrow-l"
           :class="{light: arrowColor === 'light'}"
-          @click.stop="moveItemPosition('left')"
+          @click.stop="throttledArrowClick('left')"
         ></li>
         <li
           class="la-icon-arrow la-icon-arrow-r"
           :class="{light: arrowColor === 'light'}"
-          @click.stop="moveItemPosition('right')"></li>
+          @click.stop="throttledArrowClick('right')"></li>
       </ul>
       <ul v-if="showIndicator"
         class="la-indicator">
@@ -30,6 +30,8 @@
 </template>
 
 <script>
+import _throttle from '../../../utils/_throttled'
+
 export default {
   name: "LaSlider",
   props: {
@@ -85,6 +87,10 @@ export default {
     }
   },
   created() {
+    // 箭头点击事件，方法写在methods内无法执行？？
+    this.throttledArrowClick = _throttle(direct => {
+      this.moveItemPosition(direct);
+    }, 300);
   },
   mounted() {
     this.updateItems();
@@ -123,7 +129,6 @@ export default {
     },
     // item切换
     moveItemPosition(direct) {
-      // TODO: 防抖
       this.countActiveIndex(direct);
       if(direct === 'left') {
         this.items.forEach((item, index) => {
@@ -197,7 +202,7 @@ export default {
         item.itemTranslate(index, this.activeIndex, this.itemsLen);
       });
       this.autoPlayItems();
-    }
+    },
     // TODO: 事件回调？
   }
 };

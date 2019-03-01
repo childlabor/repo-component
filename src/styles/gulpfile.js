@@ -26,7 +26,7 @@ gulp.task('compile', ['clean'], function() {
       mediaQuery: false // 允许在媒体查询中转换`px`
     })
   ];
-  return gulp.src('./src/*.scss')
+  return gulp.src('./src/**/*.scss')
     .pipe(sass.sync())
     .pipe(autoprefixer({
       browsers: ['ie > 9', 'last 2 versions'],

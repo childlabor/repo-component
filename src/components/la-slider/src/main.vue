@@ -6,7 +6,7 @@
       <slot>
         <!-- SliderItem -->
       </slot>
-      <ul v-if="showArrow">
+      <ul v-if="arrow">
         <li
           class="la-icon-arrow la-icon-arrow-l"
           :class="{ light: arrowColor === 'light' }"
@@ -17,7 +17,7 @@
           :class="{ light: arrowColor === 'light' }"
           @click.stop="throttledArrowClick('right')"></li>
       </ul>
-      <ul v-if="showIndicator"
+      <ul v-if="indicator"
         class="la-indicator">
         <li
           v-for="item in itemsLen"
@@ -45,6 +45,10 @@ export default {
     height: {
       type: String,
       default: '100%'
+    },
+    initIndex: {
+      type: Number,
+      default: 0
     },
     arrow: {
       type: Boolean,
@@ -99,31 +103,33 @@ export default {
     }, 500);
   },
   mounted() {
-    this.updateItems();
+    this.initItems();
     this.touchEvent();
     this.autoPlayItems();
   },
+  watch: {
+    activeIndex(newVal, oldVal) {
+      this.$emit(
+        'changeIndex',
+        {
+          activeIndex: newVal,
+          oldIndex: oldVal
+        })
+    }
+  },
   computed: {
-    showArrow: function() {
-      return this.arrow;
-    },
-
-    showIndicator: function() {
-      return this.indicator;
-    },
-
-    countTouchRatio: function() {
+    countTouchRatio() {
       return this.$el.offsetWidth * this.touchRatio;
     }
   },
   methods: {
     // 更新item状态数据
-    updateItems() {
+    initItems() {
       // 缓存子组件
       this.items = this.$children.filter(child => child.$options.name === 'SliderItem');
       this.itemsLen = this.$children.length;
       // 初始化位置
-      this.activeIndex = this.oldIndex = this.itemsLen - 1;
+      this.activeIndex = this.oldIndex = this.initIndex;
       this.items.forEach((item, index) => {
         item.initItemTranslate(index, this.activeIndex, this.itemsLen);
         item.addIsTransition(index, this.activeIndex, this.oldIndex);
@@ -164,6 +170,7 @@ export default {
         this.startX = event.touches[0].clientX
         _this.pausePlayItems();
       }, false);
+
       this.$el.addEventListener('touchmove', function(e) {
         let event = e|| window.event;
         let currentDis = this.moveDis || 0;
@@ -176,6 +183,7 @@ export default {
           item.touchmoveTranslate(incrementDis)
         });
       }, false);
+
       this.$el.addEventListener('touchend', function(e) {
         let event = e|| window.event;
         this.endX = event.changedTouches[0].clientX;
@@ -210,6 +218,7 @@ export default {
     },
 
     handleIndicator(indicatorIndex) {
+      if(indicatorIndex <= 0 || indicatorIndex > this.itemsLen) return;
       this.pausePlayItems();
       this.oldIndex = this.activeIndex;
       this.activeIndex = indicatorIndex - 1;
@@ -218,8 +227,15 @@ export default {
         item.itemTranslate(index, this.activeIndex, this.itemsLen);
       });
       this.autoPlayItems();
+    },
+
+    sliderPrev() {
+      this.throttledArrowClick('left');
+    },
+
+    sliderNext() {
+      this.throttledArrowClick('right');
     }
-    // TODO: 事件回调？
   }
 };
 </script>

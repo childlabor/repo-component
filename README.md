@@ -67,6 +67,7 @@ this.$toast({
 | autoplay | 自动切换 | Boolean | true/false | true |
 | interval | 切换间隔 | Number | -- | 3000 |
 | direction | 切换方向 | String | left/right | left |
+| touchRatio | 触发切换所需拖动比例 | Number | 0~1 | 0.3 |
 
 #### 轻提示：toast
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |

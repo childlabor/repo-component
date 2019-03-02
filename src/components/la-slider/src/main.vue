@@ -1,7 +1,7 @@
 <template>
   <div
     class="la-slider"
-    :style="{ height: height}">
+    :style="{ height: height }">
     <div class="slider-container">
       <slot>
         <!-- SliderItem -->
@@ -9,12 +9,12 @@
       <ul v-if="showArrow">
         <li
           class="la-icon-arrow la-icon-arrow-l"
-          :class="{light: arrowColor === 'light'}"
+          :class="{ light: arrowColor === 'light' }"
           @click.stop="throttledArrowClick('left')"
         ></li>
         <li
           class="la-icon-arrow la-icon-arrow-r"
-          :class="{light: arrowColor === 'light'}"
+          :class="{ light: arrowColor === 'light' }"
           @click.stop="throttledArrowClick('right')"></li>
       </ul>
       <ul v-if="showIndicator"
@@ -22,7 +22,10 @@
         <li
           v-for="item in itemsLen"
           :key="item"
-          :class="{on: activeIndex === item-1, light: indicatorColor === 'light'}"
+          :class="{
+            on: activeIndex === item-1,
+            light: indicatorColor === 'light'
+          }"
           @click.stop="handleIndicator(item)"></li>
       </ul>
     </div>
@@ -49,7 +52,7 @@ export default {
     },
     arrowColor: {
       type: String,
-      default: 'deep' // light/deep
+      default: 'deep'
     },
     indicator: {
       type: Boolean,
@@ -69,8 +72,12 @@ export default {
     },
     direction: {
       type: String,
-      default: 'left' // left/right
+      default: 'left'
     },
+    touchRatio: {
+      type: Number,
+      default: 0.3
+    }
   },
   data() {
     return {
@@ -82,15 +89,14 @@ export default {
       startX: 0,
       moveX: 0,
       endX: 0,
-      moveDis: 0,
-      endDis: 0
+      moveDis: 0
     }
   },
   created() {
-    // 箭头点击事件，方法写在methods内无法执行？？
+    // ?箭头点击事件，方法写在methods内无法执行
     this.throttledArrowClick = _throttle(direct => {
       this.moveItemPosition(direct);
-    }, 300);
+    }, 500);
   },
   mounted() {
     this.updateItems();
@@ -101,8 +107,13 @@ export default {
     showArrow: function() {
       return this.arrow;
     },
+
     showIndicator: function() {
       return this.indicator;
+    },
+
+    countTouchRatio: function() {
+      return this.$el.offsetWidth * this.touchRatio;
     }
   },
   methods: {
@@ -118,6 +129,7 @@ export default {
         item.addIsTransition(index, this.activeIndex, this.oldIndex);
       });
     },
+
     // 当前index
     countActiveIndex(direct) {
       this.oldIndex = this.activeIndex;
@@ -127,6 +139,7 @@ export default {
         (this.activeIndex === 0) ? this.activeIndex = this.itemsLen-1: this.activeIndex -= 1;
       }
     },
+
     // item切换
     moveItemPosition(direct) {
       this.countActiveIndex(direct);
@@ -142,7 +155,8 @@ export default {
         });
       }
     },
-    // 滑动
+
+    // 滑动弹性
     touchEvent() {
       let _this = this;
       this.$el.addEventListener('touchstart', function(e) {
@@ -151,35 +165,35 @@ export default {
         _this.pausePlayItems();
       }, false);
       this.$el.addEventListener('touchmove', function(e) {
-        // TODO:弹性滑动
         let event = e|| window.event;
-        this.moveX = event.touches[0].clientX;
         let currentDis = this.moveDis || 0;
-        // console.log('currentDis:', currentDis);
+        this.moveX = event.touches[0].clientX;
         this.moveDis = this.moveX - this.startX;
-        // console.log('movedis:', this.moveDis);
+        // 单次增量
         let incrementDis = this.moveDis - currentDis;
-
-        // _this.items.forEach((item, index) => {
-        //   item.touchmoveTranslate(incrementDis)
-        // });
+        _this.items.forEach((item, index) => {
+          item.addIsTransition(index, this.activeIndex, this.oldIndex);
+          item.touchmoveTranslate(incrementDis)
+        });
       }, false);
       this.$el.addEventListener('touchend', function(e) {
         let event = e|| window.event;
         this.endX = event.changedTouches[0].clientX;
-        let dis = this.endX - this.startX;
-        if(dis < -50) {
+        // methods内调用计算属性值 需指向vm?
+        if(this.moveDis < -_this.countTouchRatio) {
           _this.moveItemPosition('left');
-        } else if(dis > 50) {
+        } else if(this.moveDis > _this.countTouchRatio) {
           _this.moveItemPosition('right');
+        } else {
+          _this.items.forEach((item, index) => {
+            item.touchmoveTranslate(this.moveDis * -1)
+          });
         }
+        this.moveDis = this.startX = this.endX = this.moveX = 0;
         _this.autoPlayItems();
-        // _this.items.forEach((item, index) => {
-        //   item.touchmoveTranslate(this.moveDis*-1)
-        // });
-        // this.moveDis = 0;
       }, false);
     },
+
     autoPlayItems() {
       if(this.autoplay) {
         this.timer = setInterval(() => {
@@ -187,12 +201,14 @@ export default {
         }, this.interval);
       }
     },
+
     pausePlayItems() {
       if (this.timer) {
         clearInterval(this.timer);
         this.timer = null;
       }
     },
+
     handleIndicator(indicatorIndex) {
       this.pausePlayItems();
       this.oldIndex = this.activeIndex;
@@ -202,7 +218,7 @@ export default {
         item.itemTranslate(index, this.activeIndex, this.itemsLen);
       });
       this.autoPlayItems();
-    },
+    }
     // TODO: 事件回调？
   }
 };

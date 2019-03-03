@@ -67,13 +67,14 @@ this.$toast({
 | :------:| :------: | :------: | :------: | :------: |
 | height | 高度 | String | -- | 100% |
 | initIndex | 初始状态激活项的索引，从 0 开始 | Number | -- | 0 |
+| loop | 循环切换 | Boolean | true/false | true |
 | arrow | 切换箭头的显示 | Boolean | true/false | false |
 | arrowColor | 切换箭头的色系 | String | light/deep | deep |
 | indicator | 底部指示器 | Boolean | true/false | true |
 | indicatorColor | 底部指示器色系 | String | light/deep | deep |
 | autoplay | 自动切换 | Boolean | true/false | true |
 | interval | 切换间隔 | Number | -- | 3000 |
-| direction | 切换方向 | String | left/right | left |
+| direction | 切换方向 | String | left/right | right |
 | touchRatio | 触发切换所需拖动比例 | Number | 0~1 | 0.3 |
 
 #### LaSlider Methods

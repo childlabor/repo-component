@@ -9,7 +9,7 @@ const pxtoviewport = require('postcss-px-to-viewport'); // px2vw
 const concat = require('gulp-concat'); // css合并
 const del = require('del');
 
-gulp.task('build', ['compile', 'images']);
+gulp.task('build', ['compile']);
 
 // ===================== task ==========================
 gulp.task('clean', function (cb) {
@@ -26,7 +26,7 @@ gulp.task('compile', ['clean'], function() {
       mediaQuery: false // 允许在媒体查询中转换`px`
     })
   ];
-  return gulp.src('./src/**/*.scss')
+  return gulp.src('./src/index.scss')
     .pipe(sass.sync())
     .pipe(autoprefixer({
       browsers: ['ie > 9', 'last 2 versions'],

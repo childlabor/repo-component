@@ -4,47 +4,59 @@
   left: 0;
   bottom: 0;
   right: 0;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   margin: auto;
   z-index: 9999;
   .toast-box {
     color: #fff;
-    width: 100%;
-    height: 100%;
+    padding-top: 20px;
     border-radius: 5%;
     background: rgba(0, 0, 0, .3);
     text-align: center;
     font-size: 0;
+    overflow: hidden;
   }
 
   .toast-p {
+    height: 50px;
+    padding: 0 10px 10px;
+    line-height: 50px;
     font-size: 28px;
-    color: #fff;
-    line-height: 1.5;
   }
 
   .toast-icon {
-    width: 33.33%;
-    height: 33.33%;
-    display: inline-block;
-    margin: 40px auto 10px;
+    display: table;
+    width: 80px;
+    height: 80px;
+    margin: 10px auto;
+    font-size: 70px;
     background-repeat: no-repeat;
     background-position: 0 0;
     background-size: 100%;
+    &:before {
+      display:table-cell;
+	    vertical-align:middle;
+    }
   }
 
   .icon-warning {
-    background-image: url(./images/toast/warn@2x.png);
+    &:before {
+      content: '\e64f';
+    }
   }
 
   .icon-loading {
-    background-image: url(./images/toast/loading-rotate@2x.png);
-    animation: rotate 1s infinite linear;
+    &:before {
+      content: '\e65d';
+    }
+    animation: rotate 1.5s infinite linear;
   }
 
   .icon-success {
-    background-image: url(./images/toast/success@2x.png);
+    &:before {
+      content: '\e631';
+    }
   }
 
 }

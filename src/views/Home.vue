@@ -1,11 +1,12 @@
 <template>
   <div class="home" @click="handleClick">
     <img alt="Vue logo" src="../assets/images/logo.png" />
-    <div class="slider-box">
+    <div class="slider-box" v-if="true">
       <LaSlider
         ref='abc'
         height="100%"
         :initIndex="initIndex"
+        :loop="loop"
         :arrow="arrow"
         :arrowColor="arrowColor"
         :autoplay="autoplay"
@@ -32,13 +33,15 @@
 
 export default {
   name: "home",
+
   data() {
     return {
-      initIndex: 3,
+      initIndex: 4,
+      loop: true,
       arrow: true,
       arrowColor: 'light',
-      autoplay: false,
-      interval: 3000,
+      autoplay: true,
+      interval: 1000,
       direction: 'left',
       indicator: true,
       indicatorColor: 'light',
@@ -46,8 +49,16 @@ export default {
     }
   },
   mounted() {
-    // this.$toast.warning('警告');
-    
+    this.$toast({
+      message: '测试数据5',
+      type: 'loading',
+      duration: 2000,
+      animate: 2,
+      onClose: function() {
+        console.log('closed callback');
+      }
+    });
+
   },
   methods: {
     handleClick() {
@@ -56,7 +67,7 @@ export default {
     },
     changeIndex(res) {
       // console.log(res);
-      
+
     }
   }
 };

@@ -1,6 +1,6 @@
 {
   "name": "mycustomui",
-  "version": "0.3.0",
+  "version": "0.3.6",
   "description": "基于 Vue 的自定义组件库",
   "main": "lib/customui.umd.min.js",
   "keyword": "components UI",
@@ -16,6 +16,7 @@
     "build:file": "node build/components.js > build/components.json",
     "build:theme": "gulp build --gulpfile src/styles/gulpfile.js && cp-cli src/styles/lib lib/styles",
     "lib": "vue-cli-service build --target lib --name customui --dest lib src/components/index.js && npm run build:theme",
+    "deploy": "npm publish --registry=https://registry.npmjs.org/",
     "dev": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",

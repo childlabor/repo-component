@@ -2,7 +2,7 @@
   <transition :name="animateType[animate - 1]">
     <div class="custom-toast" v-show="visible">
       <div class="toast-box">
-        <i :class="['toast-icon', `icon-${type}`]"></i>
+        <i :class="['toast-icon iconfont', `icon-${type}`]"></i>
         <p class="toast-p">{{ message }}</p>
       </div>
     </div>
@@ -12,6 +12,7 @@
 <script>
 export default {
   name: "Toast",
+
   data() {
     return {
       visible: false,
@@ -25,12 +26,15 @@ export default {
       onClose: null
     }
   },
+
   mounted() {
     this.startTimer();
   },
+
   beforeDestroy() {
     this.clearTimer();
   },
+
   watch: {
     closed(newVal) {
       if (newVal) {
@@ -38,6 +42,7 @@ export default {
       }
     }
   },
+
   methods: {
     startTimer() {
       // 设为0 不自动关闭
@@ -49,9 +54,11 @@ export default {
         }, this.duration);
       }
     },
+
     clearTimer() {
       clearTimeout(this.timer);
     },
+
     close() {
       this.closed = true;
       this.clearTimer();

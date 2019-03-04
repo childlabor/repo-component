@@ -8,7 +8,7 @@
     <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/badge/license/MIT/blue" /></a>
 </p>
 
-基于vue组件库，陆续增加中...
+基于vue的UI组件库，功能持续增加中...
 
 
 ## Installation

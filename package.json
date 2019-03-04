@@ -19,7 +19,6 @@
     "deploy": "npm publish --registry=https://registry.npmjs.org/",
     "dev": "vue-cli-service serve --mode development",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
     "inspect": "vue-cli-service inspect > build/webpack.config.inspect.js"
   },
   "peerDependencies": {

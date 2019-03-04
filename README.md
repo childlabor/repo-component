@@ -104,6 +104,14 @@ this.$toast({
 | :------:| :------: | :------: | :------: |
 | close | 主动关闭提示 | -- | this.$toast.close() |
 
+
+## Demo
+<a href="http://132.232.77.14/dist/index.html">
+  <img src="./public/demo_link.png" alt="扫码查看在线示例" width="200px" height="200px">
+</a>
+
+[扫码查看在线示例](https://github.com/childlabor/customui-demo)
+
 ## TODO list
 1. 补充组件库
 2. 组件按需引入

@@ -183,12 +183,13 @@ export default {
       let _this = this;
       this.$el.addEventListener('touchstart', function(e) {
         _this.pausePlayItems();
-        let event = e|| window.event
+        let event = e|| window.event;
         this.startX = event.touches[0].clientX
       }, false);
 
       this.$el.addEventListener('touchmove', function(e) {
         let event = e|| window.event;
+        _this.handleEventModifier(event);
         let currentDis = this.moveDis || 0;
         this.moveX = event.touches[0].clientX;
         this.moveDis = this.moveX - this.startX;
@@ -255,6 +256,11 @@ export default {
 
     sliderNext() {
       this.throttledArrowClick('right');
+    },
+
+    handleEventModifier(event) {
+      event.preventDefault();
+      event.stopPropagation();
     }
   }
 };

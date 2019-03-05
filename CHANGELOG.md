@@ -1,9 +1,9 @@
 # 更新日志
 [![NPM](https://nodei.co/npm/mycustomui.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/mycustomui/)
 
-<h1 align="center">mycustomui</h1>
+<!-- <h1 align="center">mycustomui</h1>
 
-基于vue的UI组件库，功能持续增加中...
+基于vue的UI组件库，功能持续增加中... -->
 
 ## 0.3.8
 `2019-03-04`

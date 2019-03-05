@@ -7,9 +7,28 @@
     <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/npm/v/mycustomui" /></a>
     <a href="https://www.npmjs.com/package/mycustomui"><img src="https://badgen.net/badge/license/MIT/blue" /></a>
 </p>
-
+<p align="center">
 基于vue的UI组件库，功能持续增加中...
+</p>
 
+## TOC
+<!-- TOC -->
+
+- [TOC](#toc)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Props](#props)
+  - [走马灯：LaSlider](#走马灯laslider)
+    - [LaSlider Attr](#laslider-attr)
+    - [LaSlider Methods](#laslider-methods)
+    - [LaSlider Events](#laslider-events)
+  - [轻提示：toast](#轻提示toast)
+    - [轻提示：toast Attr](#轻提示toast-attr)
+    - [toast Methods](#toast-methods)
+- [Demo](#demo)
+- [TODO list](#todo-list)
+
+<!-- /TOC -->
 
 ## Installation
 ```
@@ -59,10 +78,11 @@ this.$toast({
 
 ```
 
-
 ## Props
 
-#### 走马灯：LaSlider Attr
+### 走马灯：LaSlider
+
+#### LaSlider Attr
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | :------:| :------: | :------: | :------: | :------: |
 | height | 高度 | String | -- | 100% |
@@ -90,6 +110,8 @@ this.$toast({
 | changeIndex | 切换时触发，返回当前激活项的索引和原激活项的索引 | json |
 
 
+### 轻提示：toast
+
 #### 轻提示：toast Attr
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | :------:| :------: | :------: | :------: | :------: |
@@ -116,5 +138,5 @@ this.$toast({
 1. 补充组件库
 2. 组件按需引入
 3. 整理文档及demo
-
+4. 单元测试
 

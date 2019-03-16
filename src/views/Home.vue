@@ -1,5 +1,9 @@
 <template>
   <div class="home" @click="handleClick">
+    <div class="demo"></div>
+    <div class="demo2"></div>
+    <div class="demo3"></div>
+
     <img alt="Vue logo" src="../assets/images/logo.png" />
     <div class="slider-box" v-if="true">
       <LaSlider
@@ -79,5 +83,89 @@ export default {
       width: 100%;
       height: 60vw;
     }
+    .demo {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      margin-left: -150px;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      animation: scal 2.4s ease-in-out infinite;
+      background: red;
+    }
+    .demo2 {
+      position: absolute;
+      top: 100px;
+      left: 50%;
+      margin-left: -100px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      animation: scal 2.4s ease-out infinite;
+      background: cyan;
+    }
+    .demo3 {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      margin-left: -75px;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      animation: scal 2.4s ease-out infinite;
+      background: green;
+    }
+    
+    @keyframes scal {
+      0% {
+        transform: scale(1);
+      }
+      20% {
+        transform: scale(1.2);
+      }
+      40% {
+        transform: scale(0.9);
+      }
+      60% {
+        transform: scale(1.2);
+      }
+      80% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+    @keyframes jello {
+      11.1% {
+        transform: none
+      }
+      22.2% {
+        transform: skewX(-12.5deg) skewY(-12.5deg)
+      }
+      33.3% {
+        transform: skewX(6.25deg) skewY(6.25deg)
+      }
+      44.4% {
+        transform: skewX(-3.125deg) skewY(-3.125deg)
+      }
+      55.5% {
+        transform: skewX(1.5625deg) skewY(1.5625deg)
+      }
+      66.6% {
+        transform: skewX(-.78125deg) skewY(-.78125deg)
+      }
+      77.7% {
+        transform: skewX(.39063deg) skewY(.39063deg)
+      }
+      88.8% {
+        transform: skewX(-.19531deg) skewY(-.19531deg)
+      }
+      100% {
+        transform: none
+      }
+    }
+
   }
 </style>

@@ -31,8 +31,18 @@
 <!-- /TOC -->
 
 ## Installation
+
+### NPM
 ```
 $ npm install mycustomui --save
+
+```
+### CDN
+```
+<!-- 引入样式 -->
+<link rel="stylesheet" href="https://unpkg.com/mycustomui/lib/styles/index.css">
+<!-- 引入组件库 -->
+<script src="https://unpkg.com/mycustomui/lib/customui.umd.min.js"></script>
 ```
 
 

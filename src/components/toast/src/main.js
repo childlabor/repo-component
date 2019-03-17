@@ -62,7 +62,7 @@ const Toast = function(options) {
 };
 
 // 简略模式 只接受message参数
-['success', 'warning', 'loading'].forEach(type => {
+['success', 'warning', 'loading', 'info'].forEach(type => {
   Toast[type] = options => {
     if(typeof options === 'string') {
       options = {

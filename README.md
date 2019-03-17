@@ -125,9 +125,10 @@ this.$toast({
 #### 轻提示：toast Attr
 | 参数 | 说明 | 类型 | 可选值 | 默认值 |
 | :------:| :------: | :------: | :------: | :------: |
-| type | 提示类型 | String | ['success', 'warning', 'loading'] | -- |
+| type | 提示类型(纯文本多文字提示选info) | String | ['success', 'warning', 'loading', 'info'] | -- |
 | duration | 持续时间ms | Number | 0 默认不关闭 | 2500 |
 | message | 提示文本 | String | -- | -- |
+| fontSize | 文本字体大小 | String | 'max' | -- |
 | animate | 显示动效 | Number | [1, 2, 3] | 1 |
 | onClose | 回调函数 | Function | -- | -- |
 

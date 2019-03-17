@@ -1,9 +1,14 @@
 <template>
   <transition :name="animateType[animate - 1]">
-    <div class="custom-toast" v-show="visible">
+    <div
+      class="custom-toast"
+      :class="{'toast-info': type==='info'}"
+      v-show="visible">
       <div class="toast-box">
         <i :class="['toast-icon iconfont', `icon-${type}`]"></i>
-        <p class="toast-p">{{ message }}</p>
+        <p
+          class="toast-p"
+          :class="{'max-font': fontSize==='max'}">{{ message }}</p>
       </div>
     </div>
   </transition>
@@ -18,6 +23,7 @@ export default {
       visible: false,
       closed: false,
       message: String,
+      fontSize: String,
       type: String,
       timer: null,
       duration: 2500,

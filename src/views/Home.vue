@@ -45,7 +45,8 @@ export default {
       direction: 'left',
       indicator: true,
       indicatorColor: 'light',
-      touchRatio: 0.2
+      touchRatio: 0.2,
+      sharedStore: this._store
     }
   },
   mounted() {
@@ -65,7 +66,7 @@ export default {
   methods: {
     handleClick() {
       // this.$refs.abc.sliderNext();
-      this.$refs.abc.handleIndicator(5)
+      this.$refs.abc.handleIndicator(3)
     },
     changeIndex(res) {
       // console.log(res);

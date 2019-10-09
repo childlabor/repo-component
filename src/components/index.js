@@ -2,8 +2,6 @@ import HelloWorld from './hello-world/index';
 import Toast from './toast/index';
 import {LaSlider, SliderItem} from './la-slider/index';
 
-
-
 const components = [
   HelloWorld,
   LaSlider,

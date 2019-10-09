@@ -16,6 +16,8 @@
 
 - [TOC](#toc)
 - [Installation](#installation)
+  - [NPM](#npm)
+  - [CDN](#cdn)
 - [Quick Start](#quick-start)
 - [Props](#props)
   - [走马灯：LaSlider](#走马灯laslider)

@@ -32,7 +32,7 @@ import Main from './main.vue';
 let ToastConstructor = Vue.extend(Main);
 let instance = null;
 let instances = [];
-let instanceOnClose = null; // CB
+let instanceOnClose = null; // 回調
 
 const Toast = function(options) {
   // 唯一性

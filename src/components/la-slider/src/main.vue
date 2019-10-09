@@ -1,57 +1,57 @@
 <template>
-  <div
-    class="la-slider"
-    :style="{ height: height }">
+  <div class="la-slider" :style="{ height: height }">
     <div class="slider-container">
       <slot>
         <!-- SliderItem -->
       </slot>
       <ul v-if="arrow">
         <transition name="fade">
-        <li
-          v-show="!(!loop && activeIndex === 0)"
-          class="la-icon-arrow la-icon-arrow-l"
-          :class="{ light: arrowColor === 'light' }"
-          @click.stop="throttledArrowClick('left')"
-        ></li>
+          <li
+            v-show="!(!loop && activeIndex === 0)"
+            class="la-icon-arrow la-icon-arrow-l"
+            :class="{ light: arrowColor === 'light' }"
+            @click.stop="throttledArrowClick('left')"
+          ></li>
         </transition>
         <transition name="fade">
-        <li
-          v-show="!(!loop && activeIndex === itemsLen -1)"
-          class="la-icon-arrow la-icon-arrow-r"
-          :class="{ light: arrowColor === 'light' }"
-          @click.stop="throttledArrowClick('right')"></li>
+          <li
+            v-show="!(!loop && activeIndex === itemsLen - 1)"
+            class="la-icon-arrow la-icon-arrow-r"
+            :class="{ light: arrowColor === 'light' }"
+            @click.stop="throttledArrowClick('right')"
+          ></li>
         </transition>
       </ul>
-      <ul v-if="indicator"
-        class="la-indicator">
+      <ul v-if="indicator" class="la-indicator">
         <li
           v-for="item in itemsLen"
           :key="item"
           :class="{
-            on: activeIndex === item-1,
+            on: activeIndex === item - 1,
             light: indicatorColor === 'light'
           }"
-          @click.stop="handleIndicator(item)"></li>
+          @click.stop="handleIndicator(item)"
+        ></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import _throttle from '../../../utils/_throttled'
+import _throttle from "../../../utils/_throttled";
 
 export default {
   name: "LaSlider",
 
   props: {
-    type: {  // TODO: 切换效果类型
+    type: {
+      // TODO: 切换效果类型
       type: String,
-      default: ''
+      default: ""
     },
     height: {
       type: String,
-      default: '100%'
+      default: "100%"
     },
     initIndex: {
       type: Number,
@@ -67,7 +67,7 @@ export default {
     },
     arrowColor: {
       type: String,
-      default: 'deep'
+      default: "deep"
     },
     indicator: {
       type: Boolean,
@@ -75,7 +75,7 @@ export default {
     },
     indicatorColor: {
       type: String,
-      default: 'deep' // light/deep
+      default: "deep" // light/deep
     },
     autoplay: {
       type: Boolean,
@@ -87,7 +87,7 @@ export default {
     },
     direction: {
       type: String,
-      default: 'right'
+      default: "right"
     },
     touchRatio: {
       type: Number,
@@ -106,7 +106,7 @@ export default {
       moveX: 0,
       endX: 0,
       moveDis: 0
-    }
+    };
   },
 
   computed: {
@@ -117,12 +117,10 @@ export default {
 
   watch: {
     activeIndex(newVal, oldVal) {
-      this.$emit(
-        'changeIndex',
-        {
-          activeIndex: newVal,
-          oldIndex: oldVal
-        })
+      this.$emit("changeIndex", {
+        activeIndex: newVal,
+        oldIndex: oldVal
+      });
     }
   },
 
@@ -149,7 +147,9 @@ export default {
     // 更新item状态数据
     initItems() {
       // 缓存子组件
-      this.items = this.$children.filter(child => child.$options.name === 'SliderItem');
+      this.items = this.$children.filter(
+        child => child.$options.name === "SliderItem"
+      );
       this.itemsLen = this.$children.length;
       // 初始化位置
       this.activeIndex = this.oldIndex = this.initIndex;
@@ -165,10 +165,18 @@ export default {
     // 当前index
     countActiveIndex(direct) {
       this.oldIndex = this.activeIndex;
-      if(direct === 'right') {
-        (this.activeIndex === this.itemsLen -1) ? (this.loop ? this.activeIndex = 0: this.activeIndex = this.itemsLen -1) : this.activeIndex++;
+      if (direct === "right") {
+        this.activeIndex === this.itemsLen - 1
+          ? this.loop
+            ? (this.activeIndex = 0)
+            : (this.activeIndex = this.itemsLen - 1)
+          : this.activeIndex++;
       } else {
-        (this.activeIndex === 0) ? (this.loop ? this.activeIndex = this.itemsLen-1: this.activeIndex = 0) : this.activeIndex--;
+        this.activeIndex === 0
+          ? this.loop
+            ? (this.activeIndex = this.itemsLen - 1)
+            : (this.activeIndex = 0)
+          : this.activeIndex--;
       }
     },
 
@@ -181,51 +189,66 @@ export default {
     // 滑动弹性
     bindTouchEvent() {
       let _this = this;
-      this.$el.addEventListener('touchstart', function(e) {
-        _this.pausePlayItems();
-        let event = e|| window.event;
-        this.startX = event.touches[0].clientX
-      }, false);
+      this.$el.addEventListener(
+        "touchstart",
+        function(e) {
+          _this.pausePlayItems();
+          let event = e || window.event;
+          this.startX = event.touches[0].clientX;
+        },
+        false
+      );
 
-      this.$el.addEventListener('touchmove', function(e) {
-        let event = e|| window.event;
-        _this.handleEventModifier(event);
-        let currentDis = this.moveDis || 0;
-        this.moveX = event.touches[0].clientX;
-        this.moveDis = this.moveX - this.startX;
-        // 单次增量
-        let incrementDis = this.moveDis - currentDis;
-        _this.items.forEach((item, index) => {
-          item.addIsTransition(index, this.activeIndex, this.oldIndex);
-          item.touchmoveTranslate(incrementDis)
-        });
-      }, false);
-
-      this.$el.addEventListener('touchend', function(e) {
-        let event = e|| window.event;
-        this.endX = event.changedTouches[0].clientX;
-        // methods内调用计算属性值 需指向vm?
-        if(this.moveDis < -_this.countTouchRatio) {
-          _this.moveItemPosition('right');
-        } else if(this.moveDis > _this.countTouchRatio) {
-          _this.moveItemPosition('left');
-        } else {
+      this.$el.addEventListener(
+        "touchmove",
+        function(e) {
+          let event = e || window.event;
+          _this.handleEventModifier(event);
+          let currentDis = this.moveDis || 0;
+          this.moveX = event.touches[0].clientX;
+          this.moveDis = this.moveX - this.startX;
+          // 单次增量
+          let incrementDis = this.moveDis - currentDis;
           _this.items.forEach((item, index) => {
-            item.touchmoveTranslate(this.moveDis * -1)
+            item.addIsTransition(index, this.activeIndex, this.oldIndex);
+            item.touchmoveTranslate(incrementDis);
           });
-        }
-        this.moveDis = this.startX = this.endX = this.moveX = 0;
-        _this.autoPlayItems();
-      }, false);
+        },
+        false
+      );
+
+      this.$el.addEventListener(
+        "touchend",
+        function(e) {
+          let event = e || window.event;
+          this.endX = event.changedTouches[0].clientX;
+          // methods内调用计算属性值 需指向vm?
+          if (this.moveDis < -_this.countTouchRatio) {
+            _this.moveItemPosition("right");
+          } else if (this.moveDis > _this.countTouchRatio) {
+            _this.moveItemPosition("left");
+          } else {
+            _this.items.forEach((item, index) => {
+              item.touchmoveTranslate(this.moveDis * -1);
+            });
+          }
+          this.moveDis = this.startX = this.endX = this.moveX = 0;
+          _this.autoPlayItems();
+        },
+        false
+      );
     },
 
     autoPlayItems() {
-      if(this.autoplay) {
+      if (this.autoplay) {
         this.timer = setInterval(() => {
-          if(!this.loop) {
-            if( this.activeIndex === 0  && this.direction === 'left') {
+          if (!this.loop) {
+            if (this.activeIndex === 0 && this.direction === "left") {
               return this.handleIndicator(this.itemsLen);
-            } else if( this.activeIndex === this.itemsLen -1 && this.direction === 'right') {
+            } else if (
+              this.activeIndex === this.itemsLen - 1 &&
+              this.direction === "right"
+            ) {
               return this.handleIndicator(1);
             }
           }
@@ -242,7 +265,7 @@ export default {
     },
 
     handleIndicator(indicatorIndex) {
-      if(indicatorIndex <= 0 || indicatorIndex > this.itemsLen) return; // 无效数据
+      if (indicatorIndex <= 0 || indicatorIndex > this.itemsLen) return; // 无效数据
       this.pausePlayItems();
       this.oldIndex = this.activeIndex;
       this.activeIndex = indicatorIndex - 1;
@@ -251,11 +274,11 @@ export default {
     },
 
     sliderPrev() {
-      this.throttledArrowClick('left');
+      this.throttledArrowClick("left");
     },
 
     sliderNext() {
-      this.throttledArrowClick('right');
+      this.throttledArrowClick("right");
     },
 
     handleEventModifier(event) {

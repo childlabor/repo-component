@@ -1,6 +1,6 @@
 {
   "name": "mycustomui",
-  "version": "0.3.9",
+  "version": "0.3.10",
   "description": "基于 Vue 的自定义组件库",
   "main": "lib/customui.umd.min.js",
   "keyword": "components UI",
@@ -32,6 +32,7 @@
     "@vue/cli-plugin-eslint": "^3.4.0",
     "@vue/cli-service": "^3.4.0",
     "@vue/eslint-config-prettier": "^4.0.1",
+    "autoprefixer": "^9.6.1",
     "babel-eslint": "^10.0.1",
     "cp-cli": "^2.0.0",
     "del": "^3.0.0",
